@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class BombSpawner : Spawner<Bomb>
 {
-    private Vector3 _nextBombPosition;
-
-    private void Awake()
-    {
-        InitObjectPool();
-    }
+    private Vector3 _nextBombPosition;    
 
     public void Spawn(Vector3 position)
     {
@@ -17,11 +12,10 @@ public class BombSpawner : Spawner<Bomb>
 
     protected override void EnableObj(PoolableObject obj)
     {
-        if (obj is Bomb bomb)
-        {
-            base.EnableObj(obj);
+        Bomb bomb = (Bomb)obj;
 
-            bomb.Init(_nextBombPosition);
-        }
+        base.EnableObj(bomb);
+
+        bomb.Init(_nextBombPosition);
     }
 }

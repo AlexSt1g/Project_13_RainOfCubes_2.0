@@ -13,7 +13,13 @@ public class Spawner<T> : MonoBehaviour where T : PoolableObject
 
     public event Action<int, int, int> ObjectsCountChanged;
 
-    protected void InitObjectPool()
+    private void Awake()
+    {
+        InitObjectPool();
+        OnAwake();
+    }
+
+    private void InitObjectPool()
     {
         _pool = new ObjectPool<PoolableObject>(
             createFunc: () => Instantiate(_prefab),
@@ -26,6 +32,8 @@ public class Spawner<T> : MonoBehaviour where T : PoolableObject
 
         UpdateObjectsCountInfo();
     }
+
+    protected virtual void OnAwake() { }
 
     protected virtual void EnableObj(PoolableObject obj)
     {

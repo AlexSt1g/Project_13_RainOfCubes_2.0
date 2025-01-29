@@ -9,17 +9,15 @@ public class CubeSpawner : Spawner<Cube>
     [SerializeField] private BombSpawner _bombSpawner;
 
     private Vector3 _startPoint;
-    private WaitForSeconds _waitRepeatRate;
+    private WaitForSeconds _waitRepeatRate;    
 
-    private void Awake()
-    {                
+    protected override void OnAwake()
+    {
         _startPoint = _floor.transform.position;
         _startPoint.y += _startPointHeight;
         _waitRepeatRate = new WaitForSeconds(_repeatRate);
-
-        InitObjectPool();
     }
-    
+
     private void Start()
     {         
         StartCoroutine(RepeatGetCube());
